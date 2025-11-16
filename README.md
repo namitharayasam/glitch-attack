@@ -54,7 +54,8 @@ cp .env.example .env
 
 ## Data Preparation
 
-### 1. Download prompts: Download the HarmBench test set from the HarmBench GitHub repository and upload the resulting CSV file to your GCS bucket.
+### 1. Download prompts: 
+Download the HarmBench test set from the HarmBench GitHub repository and upload the resulting CSV file to your GCS bucket.
 
 ### 2. Upload data to Google Cloud Storage: 
 - Upload the C4 data subset (e.g., for finding glitch tokens) to your GCS bucket.
@@ -69,5 +70,53 @@ gs://your-bucket/
 ---
 
 ## Configuration
+- Edit the glitch token list in classify.py
+- Change the ENTRYPOINT in Dockerfile based on which script you want to run
 
 
+## Usage
+### Running on Google Cloud Vertex AI
+
+1. Build Docker image:
+```bash
+docker build --platform linux/amd64 -t gcr.io/your-project-id/glitch-analysis:latest .
+```
+
+2. Push to Google Container Registry:
+
+```bash
+docker push gcr.io/your-project-id/glitch-analysis:latest
+```
+
+3. Submit training job:
+```bash
+gcloud ai custom-jobs create \
+  --region=us-central1 \
+  --display-name=glitch-analysis-job \
+  --worker-pool-spec=machine-type=n1-standard-4,replica-count=1,accelerator-type=NVIDIA_TESLA_T4,accelerator-count=1,container-image-uri=gcr.io/your-project-id/glitch-analysis:latest
+```
+
+4. Adjust GPU based on requirements:
+
+- For larger models: Use NVIDIA_TESLA_V100 or NVIDIA_TESLA_A100
+- For more memory: Increase machine-type to n1-highmem-8 or n1-highmem-16
+- For faster processing: Increase accelerator-count or use multiple workers
+
+
+### Arguments
+
+- `--model-name` - HuggingFace model name (ex: `mistralai/Mistral-7B-Instruct-v0.2`)  
+- `--bucket` - GCS bucket name  
+- `--input-gcs` - Input CSV path in GCS  
+- `--output-gcs` - Output CSV path in GCS  
+- `--glitch-tokens` - List of glitch tokens to test  
+- `--positions` - Token positions: prefix, middle, suffix  
+- `--num-examples` - Number of examples to process (default: all)  
+- `--batch-size` - Batch size (default: 32)  
+- `--max-new-tokens` - Max tokens to generate (default: 100)
+
+## Docker build fails:
+
+- Ensure platform is set: --platform linux/amd64
+
+- Check Docker has enough memory allocated
