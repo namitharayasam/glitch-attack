@@ -55,7 +55,7 @@ cp .env.example .env
 ## Data Preparation
 
 ### 1. Download prompts: 
-Download the HarmBench test set from the HarmBench GitHub repository and upload the resulting CSV file to your GCS bucket.
+Download the HarmBench test set from the [HarmBench GitHub repository](https://github.com/centerforaisafety/HarmBench) and upload the resulting CSV file to your GCS bucket.
 
 ### 2. Upload data to Google Cloud Storage: 
 - Upload the C4 data subset (e.g., for finding glitch tokens) to your GCS bucket.
@@ -63,15 +63,15 @@ Download the HarmBench test set from the HarmBench GitHub repository and upload 
 
 Example GCS structure:
 
-gs://your-bucket/
-├── c4_subset.csv
-├── harmbench_prompts.csv
-└── outputs/
+- `gs://your-bucket/`
+  - `c4_subset.csv`
+  - `harmbench_prompts.csv`
+  - `outputs/`
 ---
 
 ## Configuration
 - Edit the glitch token list in classify.py
-- Change the ENTRYPOINT in Dockerfile based on which script you want to run
+- Change the `ENTRYPOINT` in Dockerfile based on which script you want to run
 
 
 ## Usage
@@ -96,10 +96,10 @@ gcloud ai custom-jobs create \
   --worker-pool-spec=machine-type=n1-standard-4,replica-count=1,accelerator-type=NVIDIA_TESLA_T4,accelerator-count=1,container-image-uri=gcr.io/your-project-id/glitch-analysis:latest
 ```
 
-4. Adjust GPU based on requirements:
+4. Adjust the GPU based on requirements:
 
-- For larger models: Use NVIDIA_TESLA_V100 or NVIDIA_TESLA_A100
-- For more memory: Increase machine-type to n1-highmem-8 or n1-highmem-16
+- For larger models: Use `NVIDIA_TESLA_V100` or `NVIDIA_TESLA_A100`
+- For more memory: Increase machine-type to `n1-highmem-8` or `n1-highmem-16`
 - For faster processing: Increase accelerator-count or use multiple workers
 
 
@@ -117,6 +117,5 @@ gcloud ai custom-jobs create \
 
 ## Docker build fails:
 
-- Ensure platform is set: --platform linux/amd64
-
+- Ensure platform is set: ```bash --platform linux/amd64 ```
 - Check Docker has enough memory allocated
