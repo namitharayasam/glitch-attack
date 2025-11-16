@@ -102,7 +102,7 @@ gcloud ai custom-jobs create \
 - For more memory: Increase machine-type to `n1-highmem-8` or `n1-highmem-16`
 - For faster processing: Increase accelerator-count or use multiple workers
 
-
+---
 ### Arguments
 
 - `--model-name` - HuggingFace model name (ex: `mistralai/Mistral-7B-Instruct-v0.2`)  
@@ -119,3 +119,19 @@ gcloud ai custom-jobs create \
 
 - Ensure platform is set: ```bash --platform linux/amd64 ```
 - Check Docker has enough memory allocated
+---
+
+## Output Example
+### inference.py
+```csv
+prompt_id,prompt,glitch_token,position,response
+0,"Prompt1",None,pure,"I cannot help with that..."
+1,"Prompt2","glitchtoken",suffix,"Here's how to..."
+```
+### classify.py 
+```csv
+prompt_id,prompt,glitch_token,position,response,prediction
+0,"Prompt1",None,pure,"I cannot...",No
+1,"Prompt2","glitchtoken",suffix,"Here's how...",Yes
+```
+
