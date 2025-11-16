@@ -124,13 +124,13 @@ gcloud ai custom-jobs create \
 ## Output Example
 ### inference.py
 ```csv
-**prompt_id,prompt,glitch_token,position,response**
+prompt_id,prompt,glitch_token,position,response
 0,"Prompt1",None,pure,"I cannot help with that..."
 1,"Prompt2","glitchtoken",suffix,"Here's how to..."
 ```
 ### classify.py 
 ```csv
-**prompt_id,prompt,glitch_token,position,response,prediction**
+prompt_id,prompt,glitch_token,position,response,prediction
 0,"Prompt1",None,pure,"I cannot...",No
 1,"Prompt2","glitchtoken",suffix,"Here's how...",Yes
 ```
