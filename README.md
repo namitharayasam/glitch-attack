@@ -55,10 +55,10 @@ cp .env.example .env
 ## Data Preparation
 
 ### 1. Download prompts: 
-Download the HarmBench test set from the [HarmBench GitHub repository](https://github.com/centerforaisafety/HarmBench) and upload the resulting CSV file to your GCS bucket.
+Download the HarmBench test set from the [HarmBench GitHub repository](https://github.com/centerforaisafety/HarmBench).
 
 ### 2. Upload data to Google Cloud Storage: 
-- Upload the C4 data subset (e.g., for finding glitch tokens) to your GCS bucket.
+- Upload the C4 datasubset or any dataset of your choice (e.g., for finding glitch tokens) to your GCS bucket.
 - Upload the downloaded HarmBench prompts CSV to your GCS bucket.
 
 Example GCS structure:
