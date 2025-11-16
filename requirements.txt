@@ -1,0 +1,14 @@
+torch==2.2.1
+transformers==4.44.2
+huggingface_hub==0.24.6
+accelerate==0.33.0
+pandas
+tqdm
+google-cloud-storage
+tiktoken
+sentencepiece
+blobfile
+gputil
+psutil
+sentence-transformers
+nltk

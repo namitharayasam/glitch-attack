@@ -1,0 +1,39 @@
+# Credentials & Secrets
+.env
+*.keyfile
+credentials.json
+service-account*.json
+*-key.json
+
+# Data files
+*.csv
+*.json
+*.parquet
+data/
+outputs/
+tmp/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pth
+*.pt
+*.pkl
+
+# HuggingFace cache
+.cache/
+hf_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+*.log
+
+# Virtual environments
+venv/
+env/
